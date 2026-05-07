@@ -26,6 +26,7 @@ public class Room {
     public boolean bookRoom() {
         if (!isOccupied) {
             isOccupied = true;
+            Hotel.increaseTotalBookings();
             return true;
         }
         return false;
@@ -35,6 +36,7 @@ public class Room {
         boolean isBooked = bookRoom();
         if (!isBooked) {
             guest.checkIn();
+            Hotel.increaseTotalBookings();
             return true;
         }
         return false;
@@ -51,10 +53,12 @@ public class Room {
 
     public void vacateRoom() {
         this.isOccupied = false;
+        Hotel.decreaseTotalBookings();
     }
 
-    public void vacateRoom(Guest guest){
+    public void vacateRoom(Guest guest) {
         this.isOccupied = false;
         guest.checkOut();
+        Hotel.decreaseTotalBookings();
     }
 }
