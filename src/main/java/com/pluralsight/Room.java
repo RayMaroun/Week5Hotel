@@ -1,0 +1,60 @@
+package com.pluralsight;
+
+public class Room {
+    private int roomNumber;
+    private String roomType;
+    private boolean isOccupied;
+
+    public Room(int roomNumber, String roomType) {
+        this.roomNumber = roomNumber;
+        this.roomType = roomType;
+        this.isOccupied = false;
+    }
+
+    public int getRoomNumber() {
+        return roomNumber;
+    }
+
+    public String getRoomType() {
+        return roomType;
+    }
+
+    public boolean isOccupied() {
+        return isOccupied;
+    }
+
+    public boolean bookRoom() {
+        if (!isOccupied) {
+            isOccupied = true;
+            return true;
+        }
+        return false;
+    }
+
+    public boolean bookRoom(Guest guest) {
+        boolean isBooked = bookRoom();
+        if (!isBooked) {
+            guest.checkIn();
+            return true;
+        }
+        return false;
+    }
+
+    /*public boolean bookRoom(Guest guest) {
+        if (!isOccupied) {
+            isOccupied = true;
+            guest.checkIn();
+            return true;
+        }
+        return false;
+    }*/
+
+    public void vacateRoom() {
+        this.isOccupied = false;
+    }
+
+    public void vacateRoom(Guest guest){
+        this.isOccupied = false;
+        guest.checkOut();
+    }
+}
